@@ -36,11 +36,11 @@
                     </li>
                     <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                         <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${#authentication.name}">
                             User Name
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#" th:href="@{'/profile' + ${#authentication.name}}">Profile</a></li>
                             <li><a class="dropdown-item" href="#">My Album</a></li>
                             <li>
                                 <hr class="dropdown-divider">
