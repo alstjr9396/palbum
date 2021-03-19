@@ -40,7 +40,7 @@
                             User Name
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#" th:href="@{'/profile' + ${#authentication.name}}">Profile</a></li>
+                            <li><a class="dropdown-item" href="#" th:href="@{'/profile/' + ${#authentication.name}}">Profile</a></li>
                             <li><a class="dropdown-item" href="#">My Album</a></li>
                             <li>
                                 <hr class="dropdown-divider">

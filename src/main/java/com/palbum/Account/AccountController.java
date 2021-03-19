@@ -7,9 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -19,6 +17,7 @@ public class AccountController {
 
     private final SignUpFormValidator signUpFormValidator;
     private final AccountService accountService;
+    private final AccountRepository accountRepository;
 
     @InitBinder("signUpForm")
     void signUpInitBinder(WebDataBinder webDataBinder) {
@@ -39,5 +38,13 @@ public class AccountController {
         Account account = accountService.createNewAccount(signUpForm);
         accountService.login(account);
         return "redirect:/";
+    }
+
+    @GetMapping("/profile/{nickname}")
+    public String profileView(@PathVariable String nickname, @CurrentAccount Account account, Model model) {
+        Account unknownAccount = accountRepository.findByNickname(nickname);
+        model.addAttribute(unknownAccount);
+        model.addAttribute("isOwner", unknownAccount.equals(account));
+        return "account/profile";
     }
 }

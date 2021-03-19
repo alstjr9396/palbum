@@ -1,6 +1,7 @@
-package com.palbum.Account;
+package com.palbum.album;
 
-import com.palbum.album.Album;
+import com.palbum.Account.Account;
+import com.palbum.comment.Comment;
 import com.palbum.tag.Tag;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,32 +15,27 @@ import java.util.Set;
 @Entity
 @Getter @Setter
 @EqualsAndHashCode(of = "id")
-public class Account {
+public class Album {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
-    private String nickname;
+    private String title;
 
-    private String message;
-
-    private String email;
-
-    private String password;
+    private String content;
 
     private LocalDateTime createdAt;
 
-    private String occupation;
+    private LocalDateTime updatedTime;
 
-    @Lob
-    @Basic(fetch = FetchType.EAGER)
-    private String profileImage;
-
-    @OneToMany
-    private Set<Album> albums = new HashSet<>();
+    @OneToOne
+    private Account account;
 
     @ManyToMany
     private Set<Tag> tags = new HashSet<>();
+
+    @OneToMany
+    private Set<Comment> comments = new HashSet<>();
+
 }
